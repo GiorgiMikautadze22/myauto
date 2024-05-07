@@ -3,16 +3,18 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $cars = \App\Models\Car::all();
-    return view('cars.index', [
-        'cars' => \App\Models\Car::Paginate(12)
+    $cars = \App\Models\Post::all();
+    return view('home', [
+        'posts' => \App\Models\Post::Paginate(12)
     ]);
 });
 
-Route::get('/{id}', function ($id) {
-    $car = \App\Models\Car::find($id);
+Route::resource('posts', \App\Http\Controllers\PostController::class);
 
-    return view('cars.show', [
-        'car' => $car
-    ]);
-});
+//Route::get('/{id}', function ($id) {
+//    $car = \App\Models\Post::find($id);
+//
+//    return view('post.show', [
+//        'post' => $post
+//    ]);
+//});

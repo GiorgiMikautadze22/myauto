@@ -3,8 +3,8 @@
     <section class="my-10 flex items-center justify-center">
         <div class="w-[1000px]">
             <div class="flex items-baseline gap-5">
-                <h2 class="text-[32px] font-bold">{{$car->make}}</h2>
-                <p class="text-[27px] font-bold text-gray-400">{{$car->year}}</p>
+                <h2 class="text-[32px] font-bold">{{$post->make}}</h2>
+                <p class="text-[27px] font-bold text-gray-400">{{$post->year}}</p>
             </div>
             <div class="flex gap-10 mt-10">
 
@@ -13,7 +13,7 @@
                     alt="" class="rounded-[12px]">
                 <div class="w-120px grid rounded-[12px] px-10 bg-white">
                     <p class="text-[27px] font-bold">
-                       COST: ${{$car->cost}}
+                       COST: ${{$post->cost}}
                     </p>
                 </div>
             </div>
