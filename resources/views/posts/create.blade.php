@@ -6,10 +6,16 @@
             <div class="w-full h-[1px] bg-gray-300"></div>
             <div class="mt-10">
                 <div>
-{{--                    <p class="text-[11px] text-gray-400 font-semibold ml-3 relative top-5">Manufacturer</p>--}}
-                <label>
-                    <input type="text" class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center" placeholder="Manufacturer">
-                </label>
+                    <label>
+                        <select
+                            name="" id=""
+                            class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5">
+                            <option hidden="">Manufacturer</option>
+                            @foreach($cars as $car)
+                                <option>{{$car->make}}</option>
+                            @endforeach
+                        </select>
+                    </label>
                     <img src="" alt="">
                 </div>
 

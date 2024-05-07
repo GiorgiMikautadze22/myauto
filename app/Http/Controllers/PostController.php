@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,9 @@ class PostController extends Controller
     public function create()
     {
         //creating a post
-        return view('posts.create');
+        $cars = Car::all();
+
+        return view('posts.create', ['cars' => $cars]);
     }
 
     /**

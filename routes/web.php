@@ -10,11 +10,3 @@ Route::get('/', function () {
 });
 
 Route::resource('posts', \App\Http\Controllers\PostController::class);
-
-//Route::get('/{id}', function ($id) {
-//    $car = \App\Models\Post::find($id);
-//
-//    return view('post.show', [
-//        'post' => $post
-//    ]);
-//});
