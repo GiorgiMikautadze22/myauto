@@ -13,11 +13,11 @@
 
     </div>
     <div class="flex items-center gap-5">
-        <div
+        <a href="/posts/create"
             class="px-5 h-[40px] bg-red-300 rounded-[12px] items-center flex justify-center gap-2 hover:bg-red-400 transition cursor-pointer">
             <img src="https://www.clker.com/cliparts/s/7/R/k/j/Z/icon-add.svg.hi.png" class="w-[20px] h-[20px]" alt="add icon">
-            <a href="/posts/create" class="text-[15px] text-white font-semibold">Add</a>
-        </div>
+            <p class="text-[15px] text-white font-semibold">Add</p>
+        </a>
         <div
             class="flex items-center gap-3 border border-gray-300 rounded-[12px] px-5 h-[40px] hover:bg-gray-200 hover:border-gray-400 transition cursor-pointer">
             <img src="https://www.svgrepo.com/show/348179/language.svg" class="w-[20px] h-[20px]" alt="language icon">
