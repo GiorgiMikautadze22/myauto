@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -23,9 +24,11 @@ class PostController extends Controller
     public function create()
     {
         //creating a post
-        $cars = Car::all();
+        $models = Car::all();
+        $brands = Brand::all();
 
-        return view('posts.create', ['cars' => $cars]);
+
+        return view('posts.create', ['models' => $models, 'brands' => $brands]);
     }
 
     /**
@@ -33,7 +36,29 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'make' => ['required'],
+            'model' => ['required'],
+            'year' => ['required'],
+            'color' => ['required'],
+            'mileage' => ['required'],
+            'price' => ['required'],
+            'fuel_type' => ['required'],
+            'transmission' => ['required'],
+        ]);
+
+        Post::create([
+            'make' => request('make'),
+            'model' => request('model'),
+            'year' => request('year'),
+            'color' => request('color'),
+            'mileage' => request('mileage'),
+            'price' => request('price'),
+            'fuel_type' => request('fuel_type'),
+            'transmission' => request('transmission'),
+        ]);
+
+        return redirect('');
     }
 
     /**

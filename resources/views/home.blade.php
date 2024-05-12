@@ -9,8 +9,7 @@
                         src="https://www.usnews.com/object/image/00000186-0f0d-da67-a5ef-2f5f87990000/2023-lucid-air-1.jpg?update-time=1675289789997&size=responsive640"
                         alt="post image" class="w-full h-[170px] object-cover rounded-t-[12px]">
                     <div class="bg-white w-full p-5 rounded-b-[12px]">
-                        <p>{{$post->year}} - {{$post->make}}</p>
-                        <p>${{$post->cost}}</p>
+                        <p> - {{$post->make}}</p>
                     </div>
                 </a>
             @endforeach

@@ -2,12 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Brand;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
- */
-class PostFactory extends Factory
+class BrandFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +14,10 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $makes = ['Acura', 'Alfa Romeo', 'Audi', 'BMW', 'Dodge', 'Mercedes-Benz', 'Porsche', 'Tesla', 'Toyota'];
+
         return [
-            //
+            'brand' => $this->faker->unique()->randomElement($makes)
         ];
     }
 }
