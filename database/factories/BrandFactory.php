@@ -14,10 +14,9 @@ class BrandFactory extends Factory
      */
     public function definition(): array
     {
-        $makes = ['Acura', 'Alfa Romeo', 'Audi', 'BMW', 'Dodge', 'Mercedes-Benz', 'Porsche', 'Tesla', 'Toyota'];
 
         return [
-            'brand' => $this->faker->unique()->randomElement($makes)
+            //
         ];
     }
 }

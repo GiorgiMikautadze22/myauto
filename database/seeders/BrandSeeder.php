@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Brand;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BrandSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class BrandSeeder extends Seeder
      */
     public function run(): void
     {
-        Brand::factory(9)->create();
+        $makes = ['Acura', 'Alfa Romeo', 'Audi', 'BMW', 'Dodge', 'Mercedes-Benz', 'Porsche', 'Tesla', 'Toyota'];
+
+        foreach ($makes as $make) {
+            DB::table('brands')->insert(['brand' => $make]);
+        }
     }
 }

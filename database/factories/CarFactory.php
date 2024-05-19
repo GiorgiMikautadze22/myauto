@@ -17,11 +17,9 @@ class CarFactory extends Factory
      */
     public function definition(): array
     {
-        $models = ['ILX', 'MDX', 'RDX', 'Giulia', 'Stelvio', '4C'];
 
         return [
-            'model' => $this->faker->unique()->randomElement($models),
-            'brand_id' => Brand::factory(),
+
         ];
     }
 }
