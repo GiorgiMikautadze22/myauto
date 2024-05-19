@@ -17,7 +17,7 @@ class BrandSeeder extends Seeder
         $makes = ['Acura', 'Alfa Romeo', 'Audi', 'BMW', 'Dodge', 'Mercedes-Benz', 'Porsche', 'Tesla', 'Toyota'];
 
         foreach ($makes as $make) {
-            DB::table('brands')->insert(['brand' => $make]);
+            Brand::create(['brand' => $make]);
         }
     }
 }

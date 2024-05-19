@@ -9,5 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['make', 'model'];
+//    protected $fillable = ['make', 'model', 'year']
+
+    protected $guarded = [];
 }

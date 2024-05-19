@@ -5,7 +5,7 @@
             <p>Main features</p>
             <div class="w-full h-[1px] bg-gray-300"></div>
             <div class="mt-10">
-                <form action="/posts" method="POST">
+                <form method="POST" action="/posts" >
                     @csrf
                     <div class="grid grid-cols-4 items-center gap-5">
                         <label for="make">

@@ -37,29 +37,30 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'make' => ['required'],
-            'model' => ['required'],
-            'year' => ['required'],
-            'color' => ['required'],
-            'mileage' => ['required'],
-            'price' => ['required'],
-            'fuel_type' => ['required'],
-            'transmission' => ['required'],
+            'make' => ['required', 'string', 'max:255'],
+            'model' => ['required', 'string', 'max:255'],
+            'year' => ['required', 'integer'],
+            'color' => ['required', 'string', 'max:255'],
+            'mileage' => ['required', 'integer'],
+            'price' => ['required', 'integer'],
+            'fuel_type' => ['required', 'string', 'max:255'],
+            'transmission' => ['required', 'string', 'max:255'],
         ]);
 
         Post::create([
-            'make' => request('make'),
-            'model' => request('model'),
-            'year' => request('year'),
-            'color' => request('color'),
-            'mileage' => request('mileage'),
-            'price' => request('price'),
-            'fuel_type' => request('fuel_type'),
-            'transmission' => request('transmission'),
+            'make' => $request->input('make'),
+            'model' => $request->input('model'),
+            'year' => $request->input('year'),
+            'color' => $request->input('color'),
+            'mileage' => $request->input('mileage'),
+            'price' => $request->input('price'),
+            'fuel_type' => $request->input('fuel_type'),
+            'transmission' => $request->input('transmission'),
         ]);
 
-        return redirect('');
+        return redirect("");
     }
+
 
     /**
      * Display the specified resource.
