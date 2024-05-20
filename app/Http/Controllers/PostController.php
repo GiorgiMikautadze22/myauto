@@ -26,9 +26,29 @@ class PostController extends Controller
         //creating a post
         $models = Car::all();
         $brands = Brand::all();
+        $categories = [
+            "Sedan",
+            "SUV",
+            "Coupe",
+            "Convertible",
+            "Hatchback",
+            "Wagon",
+            "Pickup Truck",
+            "Minivan",
+            "Sports Car",
+            "Luxury Car",
+            "Electric Car",
+            "Hybrid Car",
+            "Diesel Car",
+            "Crossover",
+            "Compact Car",
+            "Subcompact Car"
+        ];
 
 
-        return view('posts.create', ['models' => $models, 'brands' => $brands]);
+//        $brand_models = Brand::find()
+
+        return view('posts.create', ['models' => $models, 'brands' => $brands, 'categories' => $categories]);
     }
 
     /**
@@ -39,6 +59,7 @@ class PostController extends Controller
         $request->validate([
             'make' => ['required', 'string', 'max:255'],
             'model' => ['required', 'string', 'max:255'],
+            'category' => ['required', 'string', 'max:255'],
             'year' => ['required', 'integer'],
             'color' => ['required', 'string', 'max:255'],
             'mileage' => ['required', 'integer'],
@@ -50,6 +71,7 @@ class PostController extends Controller
         Post::create([
             'make' => $request->input('make'),
             'model' => $request->input('model'),
+            'category' => $request->input('category'),
             'year' => $request->input('year'),
             'color' => $request->input('color'),
             'mileage' => $request->input('mileage'),

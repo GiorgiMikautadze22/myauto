@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('make');
             $table->string('model');
+            $table->string('category');
             $table->integer('year');
             $table->string('color');
             $table->integer('mileage');
