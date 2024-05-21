@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+class Role extends Model
 {
     use HasFactory;
 
-    public function brand()
+    public function post()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->hasMany(Post::class);
     }
-
-
 }

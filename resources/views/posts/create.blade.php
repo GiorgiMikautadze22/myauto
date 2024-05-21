@@ -1,12 +1,13 @@
 <x-layout>
     <x-header></x-header>
+    <form method="POST" action="/posts">
+        @csrf
     <section class="mt-10 px-10">
         <div class="bg-white p-10">
             <p>Main features</p>
             <div class="w-full h-[1px] bg-gray-300"></div>
             <div class="mt-10">
-                <form method="POST" action="/posts">
-                    @csrf
+
                     <div class="grid grid-cols-4 items-center gap-5">
                         <label for="make">
                             <select
@@ -25,7 +26,8 @@
                         <label for="model" id="model-label">
                             <select
                                 name="model_id" id="model"
-                                class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5" disabled>
+                                class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5"
+                                disabled>
                                 <option hidden="">Model</option>
                             </select>
                             @error('model')
@@ -120,14 +122,66 @@
                             @enderror
                         </label>
                     </div>
-                    <div class="mt-6 flex items-center justify-end gap-x-6">
-                        <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-                        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
-                    </div>
-                </form>
+
+
             </div>
         </div>
     </section>
+        <section class="mt-10 px-10">
+            <div class="bg-white p-10">
+                <p>Roles</p>
+                <div class="w-full h-[1px] bg-gray-300"></div>
+                <div class="mt-10">
+
+
+                    <div class="flex">
+                        <label for="role_id">
+                            <input type="checkbox" name="role_id" id="role_id" value="1">
+                        </label>
+                        <p>Super VIP</p>
+                        @error('role_id')
+                        <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+                        @enderror
+
+                    </div>
+                    <div class="flex">
+                        <label>
+                            <input type="checkbox" name="role_id" id="role_id" value="2">
+                        </label>
+                        <p>VIP+</p>
+                        @error('role_id')
+                        <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+                        @enderror
+                    </div>
+                    <div class="flex">
+                        <label>
+                            <input type="checkbox" name="role_id" id="role_id" value="3">
+                        </label>
+                        <p>VIP</p>
+                        @error('role_id')
+                        <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+                        @enderror
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+        <div class="col-span-full my-10 px-10">
+            <label for="description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+            <div class="mt-2">
+                <textarea placeholder="Write Here..." id="description" name="description" rows="3" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+            </div>
+        </div>
+        <div class="mt-6 flex items-center justify-end gap-x-6 mt-10 px-10">
+            <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+            <button type="submit"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Save
+            </button>
+        </div>
+    </form>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const makeSelect = document.getElementById('make');
@@ -135,7 +189,7 @@
             const makeNameInput = document.getElementById('make_name');
             const modelNameInput = document.getElementById('model_name');
 
-            makeSelect.addEventListener('change', function() {
+            makeSelect.addEventListener('change', function () {
                 const makeId = makeSelect.value;
                 const makeName = makeSelect.options[makeSelect.selectedIndex].text;
 
@@ -162,7 +216,7 @@
                 }
             });
 
-            modelSelect.addEventListener('change', function() {
+            modelSelect.addEventListener('change', function () {
                 const modelName = modelSelect.options[modelSelect.selectedIndex].text;
                 modelNameInput.value = modelName;
             });

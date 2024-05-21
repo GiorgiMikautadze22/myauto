@@ -22,6 +22,8 @@ return new class extends Migration
             $table->integer('price');
             $table->string('fuel_type');
             $table->string('transmission');
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->string('description');
             $table->timestamps();
         });
     }

@@ -5,11 +5,15 @@ use App\Http\Controllers\CarController;
 
 
 Route::get('/', function () {
-    $cars = \App\Models\Post::all();
-
+    $super_vip = \App\Models\Role::find(1)->post;
+    $vip_plus = \App\Models\Role::find(2)->post;
+    $vip = \App\Models\Role::find(3)->post;
 
     return view('home', [
-        'posts' => \App\Models\Post::Paginate(12)
+        'posts' => \App\Models\Post::Paginate(12),
+        'super_vip' => $super_vip,
+        'vip_plus' => $vip_plus,
+        'vip' => $vip
     ]);
 });
 

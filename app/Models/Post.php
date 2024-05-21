@@ -12,4 +12,9 @@ class Post extends Model
 //    protected $fillable = ['make', 'model', 'year']
 
     protected $guarded = [];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

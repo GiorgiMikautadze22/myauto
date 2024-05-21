@@ -66,6 +66,8 @@ class PostController extends Controller
             'price' => ['required', 'integer'],
             'fuel_type' => ['required', 'string', 'max:255'],
             'transmission' => ['required', 'string', 'max:255'],
+            'role_id' => ['required'],
+            'description' => ['required', 'string', 'max:2000']
         ]);
 
         Post::create([
@@ -78,6 +80,8 @@ class PostController extends Controller
             'price' => $request->input('price'),
             'fuel_type' => $request->input('fuel_type'),
             'transmission' => $request->input('transmission'),
+            'role_id' => $request->input('role_id'),
+            'description' => $request->input('description'),
         ]);
 
         return redirect("");
