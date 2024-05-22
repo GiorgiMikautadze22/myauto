@@ -9,6 +9,9 @@ Route::get('/', function () {
     $vip_plus = \App\Models\Role::find(2)->post;
     $vip = \App\Models\Role::find(3)->post;
 
+    $brands = \App\Models\Brand::all();
+    $models = \App\Models\Car::all();
+
     $query = \App\Models\Post::query();
 
     if (request()->filled('make')) {
@@ -31,12 +34,14 @@ Route::get('/', function () {
         'posts' => $posts,
         'super_vip' => $super_vip,
         'vip_plus' => $vip_plus,
-        'vip' => $vip
+        'vip' => $vip,
+        'brands' => $brands,
+        'models' => $models
     ]);
 });
 
 
-
 Route::get('/models/{makeId}', [CarController::class, 'getModelsByMake']);
+Route::get('/filter-cars/{brand}', [CarController::class, 'getModelsForFilter']);
 
 Route::resource('posts', \App\Http\Controllers\PostController::class);

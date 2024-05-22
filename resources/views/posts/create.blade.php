@@ -180,7 +180,9 @@
                 Save
             </button>
         </div>
-    </form>
+        @error('role_id')
+        <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+        @enderror    </form>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
