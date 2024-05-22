@@ -157,6 +157,15 @@
                     modelNameInput.value = '';
                 }
             });
+
+            modelSelect.addEventListener('change', function () {
+                const selectedModel = modelSelect.options[modelSelect.selectedIndex];
+                if (selectedModel) {
+                    modelNameInput.value = selectedModel.textContent;
+                } else {
+                    modelNameInput.value = '';
+                }
+            });
         });
 
     </script>
