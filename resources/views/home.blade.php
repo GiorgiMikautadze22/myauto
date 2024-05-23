@@ -14,7 +14,7 @@
                                 <select
                                     name="make" id="make"
                                     class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5">
-                                    <option hidden="">Make</option>
+                                    <option hidden="" value="">Make</option>
                                     @foreach($brands as $brand)
                                         <option value="{{$brand->id}}">{{$brand->brand}}</option>
                                     @endforeach
@@ -32,7 +32,7 @@
                                     name="model_id" id="model"
                                     class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5"
                                     disabled>
-                                    <option hidden="">Model</option>
+                                    <option hidden="" value="">Model</option>
                                 </select>
                                 @error('model')
                                 <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
@@ -44,12 +44,35 @@
                         <input type="hidden" name="model" id="model_name">
 
                         <div>
-                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>
-                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+{{--                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>--}}
+{{--                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            <label for="year">
+                                <select
+                                    name="year" id="year"
+                                    class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5">
+                                    <option hidden="" value="">Year</option>
+                                    @for($year = 1990; $year <= 2024; $year++)
+                                        <option value="{{$year}}">{{$year}}</option>
+                                    @endfor
+                                </select>
+                                @error('year')
+                                <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+                                @enderror
+                            </label>
                         </div>
                         <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>
-                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+{{--                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>--}}
+{{--                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            <label for="price">
+                                <input
+                                    name="price" id="price"
+                                    class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5"
+                                    placeholder="Price"
+                                />
+                                @error('price')
+                                <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+                                @enderror
+                            </label>
                         </div>
                     </div>
                     <div class="mt-5">

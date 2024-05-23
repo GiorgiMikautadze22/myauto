@@ -21,11 +21,11 @@ Route::get('/', function () {
         $query->where('model', 'like', '%' . request()->input('model') . '%');
     }
     if (request()->filled('year')) {
-        $query->where('year', request()->input('year'));
+        $query->where('year', '>=', request()->input('year'));
     }
-//    if (request()->filled('price')) {
-//        $query->where('price', '<=', request()->input('price'));
-//    }
+    if (request()->filled('price')) {
+        $query->where('price', '<=', request()->input('price'));
+    }
 
     $posts = $query->paginate(12);
 
