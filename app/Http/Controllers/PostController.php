@@ -104,7 +104,28 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //edit post
+        $models = Car::all();
+        $brands = Brand::all();
+        $categories = [
+            "Sedan",
+            "SUV",
+            "Coupe",
+            "Convertible",
+            "Hatchback",
+            "Wagon",
+            "Pickup Truck",
+            "Minivan",
+            "Sports Car",
+            "Luxury Car",
+            "Electric Car",
+            "Hybrid Car",
+            "Diesel Car",
+            "Crossover",
+            "Compact Car",
+            "Subcompact Car"
+        ];
+
+        return view('posts.edit', ['post' => $post, 'brands' => $brands, 'models' => $models, 'categories' => $categories]);
     }
 
     /**
