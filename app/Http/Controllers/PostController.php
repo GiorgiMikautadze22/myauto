@@ -133,14 +133,49 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //send edited post
+        // Validate the request data
+        $request->validate([
+            'make' => ['required', 'string', 'max:255'],
+            'model' => ['required', 'string', 'max:255'],
+            'category' => ['required', 'string', 'max:255'],
+            'year' => ['required', 'integer'],
+            'color' => ['required', 'string', 'max:255'],
+            'mileage' => ['required', 'integer'],
+            'price' => ['required', 'integer'],
+            'fuel_type' => ['required', 'string', 'max:255'],
+            'transmission' => ['required', 'string', 'max:255'],
+            'role_id' => ['required'],
+            'description' => ['required', 'string', 'max:2000']
+        ]);
+
+        // Update the post instance with the validated data
+        $post->update([
+            'make' => $request->input('make'),
+            'model' => $request->input('model'),
+            'category' => $request->input('category'),
+            'year' => $request->input('year'),
+            'color' => $request->input('color'),
+            'mileage' => $request->input('mileage'),
+            'price' => $request->input('price'),
+            'fuel_type' => $request->input('fuel_type'),
+            'transmission' => $request->input('transmission'),
+            'role_id' => $request->input('role_id'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Redirect to the updated post's page
+        return redirect('/posts/' . $post->id);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Post $post)
     {
-        //delete
+
+        $post->delete();
+
+        return redirect('/');
     }
 }

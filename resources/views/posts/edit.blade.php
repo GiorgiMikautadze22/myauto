@@ -3,7 +3,7 @@
     <section class="my-10 flex items-center justify-center">
         <form method="POST" action="/posts/{{ $post->id }}">
             @csrf
-            @method('PUT')
+            @method('PATCH')
             <section class="mt-10 px-10">
                 <div class="bg-white p-10">
                     <p>Main features</p>
@@ -129,7 +129,7 @@
                     <div class="mt-10">
                         <div class="flex">
                             <label for="role_id_1">
-                                <input type="checkbox" name="role_id[]" id="role_id_1" value="1" {{ $post->role_id === 1 ? 'checked' : '' }}>
+                                <input type="checkbox" name="role_id" id="role_id" value="1" {{ $post->role_id === 1 ? 'checked' : '' }}>
                             </label>
                             <p>Super VIP</p>
                             @error('role_id')
@@ -138,7 +138,7 @@
                         </div>
                         <div class="flex">
                             <label for="role_id_2">
-                                <input type="checkbox" name="role_id[]" id="role_id_2" value="2" {{ $post->role_id === 2 ? 'checked' : '' }}>
+                                <input type="checkbox" name="role_id" id="role_id" value="2" {{ $post->role_id === 2 ? 'checked' : '' }}>
                             </label>
                             <p>VIP+</p>
                             @error('role_id')
@@ -147,7 +147,7 @@
                         </div>
                         <div class="flex">
                             <label for="role_id_3">
-                                <input type="checkbox" name="role_id[]" id="role_id_3" value="3" {{ $post->role_id === 3 ? 'checked' : '' }}>
+                                <input type="checkbox" name="role_id" id="role_id" value="3" {{ $post->role_id === 3 ? 'checked' : '' }}>
                             </label>
                             <p>VIP</p>
                             @error('role_id')
@@ -164,15 +164,24 @@
                 </div>
             </div>
             <div class="mt-6 flex items-center justify-end gap-x-6 mt-10 px-10">
-                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+                <a href="/" type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
+                <button form="delete-form"
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Delete
+                </button>
                 <button type="submit"
                         class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Save
+                    Update
                 </button>
             </div>
             @error('role_id')
             <p class="text-xs font-bold text-red-500 mt-2">{{ $message }}</p>
             @enderror
+        </form>
+
+        <form method="POST" action="/posts/{{$post->id}}" id="delete-form">
+            @csrf
+            @method('DELETE')
         </form>
 
         <script>
