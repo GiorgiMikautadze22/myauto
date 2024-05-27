@@ -44,4 +44,13 @@ Route::get('/', function () {
 Route::get('/models/{makeId}', [CarController::class, 'getModelsByMake']);
 Route::get('/filter-cars/{brand}', [CarController::class, 'getModelsForFilter']);
 
+
+//Auth
+Route::get('/register', [\App\Http\Controllers\RegisteredUserController::class, 'create']);
+Route::post('/register', [\App\Http\Controllers\RegisteredUserController::class, 'store']);
+
+Route::get('/login', [\App\Http\Controllers\SessionController::class, 'create']);
+Route::post('/login', [\App\Http\Controllers\SessionController::class, 'store']);
+Route::post('/logout', [\App\Http\Controllers\SessionController::class, 'destroy']);
+
 Route::resource('posts', \App\Http\Controllers\PostController::class);

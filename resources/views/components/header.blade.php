@@ -12,27 +12,56 @@
         </label>
 
     </div>
-    <div class="flex items-center gap-5">
-        <a href="/posts/create"
-            class="px-5 h-[40px] bg-red-300 rounded-[12px] items-center flex justify-center gap-2 hover:bg-red-400 transition cursor-pointer">
-            <img src="https://www.clker.com/cliparts/s/7/R/k/j/Z/icon-add.svg.hi.png" class="w-[20px] h-[20px]" alt="add icon">
-            <p class="text-[15px] text-white font-semibold">Add</p>
-        </a>
-        <div
-            class="flex items-center gap-3 border border-gray-300 rounded-[12px] px-5 h-[40px] hover:bg-gray-200 hover:border-gray-400 transition cursor-pointer">
-            <img src="https://www.svgrepo.com/show/348179/language.svg" class="w-[20px] h-[20px]" alt="language icon">
-            <p class="text-[15px]">English, USD$</p>
-            <img src="https://meritocracy.is/blog/wp-content/uploads/2019/01/grey-down-arrow-icon-png-1.png"
-                 class="w-[10px] h-[7px]" alt="dropdown icon">
+    @auth()
+        <div class="flex items-center gap-5">
+            <a href="/posts/create"
+               class="px-5 h-[40px] bg-red-300 rounded-[12px] items-center flex justify-center gap-2 hover:bg-red-400 transition cursor-pointer">
+                <img src="https://www.clker.com/cliparts/s/7/R/k/j/Z/icon-add.svg.hi.png" class="w-[20px] h-[20px]"
+                     alt="add icon">
+                <p class="text-[15px] text-white font-semibold">Add</p>
+            </a>
+            <div
+                class="flex items-center gap-3 border border-gray-300 rounded-[12px] px-5 h-[40px] hover:bg-gray-200 hover:border-gray-400 transition cursor-pointer">
+                <img src="https://www.svgrepo.com/show/348179/language.svg" class="w-[20px] h-[20px]"
+                     alt="language icon">
+                <p class="text-[15px]">English, USD$</p>
+                <img src="https://meritocracy.is/blog/wp-content/uploads/2019/01/grey-down-arrow-icon-png-1.png"
+                     class="w-[10px] h-[7px]" alt="dropdown icon">
+            </div>
+            <form
+                method="POST" action="/logout"
+                class="bg-blue-300 px-5 rounded-[12px] h-[40px] flex items-center text-white font-semibold border border-blue-300 hover:bg-white hover:text-blue-300 cursor-pointer transition">
+                @csrf
+                <button type="submit" class="text-[15px]">Log Out</button>
+            </form>
+
         </div>
-        <div
-            class="bg-blue-300 px-5 rounded-[12px] h-[40px] flex items-center text-white font-semibold border border-blue-300 hover:bg-white hover:text-blue-300 cursor-pointer transition">
-            <p class="text-[15px]">Log In</p>
+    @else
+        <div class="flex items-center gap-5">
+            <a href="/login"
+               class="px-5 h-[40px] bg-red-300 rounded-[12px] items-center flex justify-center gap-2 hover:bg-red-400 transition cursor-pointer">
+                <img src="https://www.clker.com/cliparts/s/7/R/k/j/Z/icon-add.svg.hi.png" class="w-[20px] h-[20px]"
+                     alt="add icon">
+                <p class="text-[15px] text-white font-semibold">Add</p>
+            </a>
+            <a href="/login"
+               class="bg-blue-300 px-5 rounded-[12px] h-[40px] flex items-center text-white font-semibold border border-blue-300 hover:bg-white hover:text-blue-300 cursor-pointer transition">
+                <p class="text-[15px]">Log In</p>
+            </a>
+            <div
+                class="bg-blue-300 px-5 rounded-[12px] h-[40px] flex items-center text-white font-semibold border border-blue-300 hover:bg-white hover:text-blue-300 cursor-pointer transition">
+                <a href="/register" class="text-[15px]">Register</a>
+            </div>
+            <div
+                class="flex items-center gap-3 border border-gray-300 rounded-[12px] px-5 h-[40px] hover:bg-gray-200 hover:border-gray-400 transition cursor-pointer">
+                <img src="https://www.svgrepo.com/show/348179/language.svg" class="w-[20px] h-[20px]"
+                     alt="language icon">
+                <p class="text-[15px]">English, USD$</p>
+                <img src="https://meritocracy.is/blog/wp-content/uploads/2019/01/grey-down-arrow-icon-png-1.png"
+                     class="w-[10px] h-[7px]" alt="dropdown icon">
+            </div>
         </div>
-        <div
-            class="bg-blue-300 px-5 rounded-[12px] h-[40px] flex items-center text-white font-semibold border border-blue-300 hover:bg-white hover:text-blue-300 cursor-pointer transition">
-            <p class="text-[15px]">Register</p>
-        </div>
-    </div>
+    @endauth
+
 
 </header>
