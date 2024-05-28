@@ -50,7 +50,7 @@
                                 <select
                                     name="year" id="year"
                                     class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5">
-                                    <option hidden="" value="">Year</option>
+                                    <option hidden="" value="">Max Year</option>
                                     @for($year = 1990; $year <= 2024; $year++)
                                         <option value="{{$year}}">{{$year}}</option>
                                     @endfor
@@ -67,7 +67,7 @@
                                 <input
                                     name="price" id="price"
                                     class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5"
-                                    placeholder="Price"
+                                    placeholder="Max Price"
                                 />
                                 @error('price')
                                 <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>

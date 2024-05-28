@@ -26,7 +26,9 @@
                     <h3 class="text-[20px] font-semibold">Description</h3>
                     <p>{{$post->description}}</p>
                     </div>
-                    <a href="{{$post->id}}/edit" class="w-[100px] h-[40px] bg-sky-300 text-white rounded-[8px] mb-5 hover:bg-sky-400 transition flex items-center justify-center font-semibold">Edit</a>
+                    @can('edit-post', $post)
+                        <a href="{{$post->id}}/edit" class="w-[100px] h-[40px] bg-sky-300 text-white rounded-[8px] mb-5 hover:bg-sky-400 transition flex items-center justify-center font-semibold">Edit</a>
+                    @endcan
                 </div>
             </div>
         </div>

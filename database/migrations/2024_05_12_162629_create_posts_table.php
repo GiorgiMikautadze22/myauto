@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('fuel_type');
             $table->string('transmission');
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignIdFor(\App\Models\User::class);
             $table->string('description');
             $table->timestamps();
         });

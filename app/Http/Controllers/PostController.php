@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -23,6 +26,13 @@ class PostController extends Controller
      */
     public function create()
     {
+
+        if(Auth::guest()){
+            return redirect('/login');
+        }
+
+
+
         //creating a post
         $models = Car::all();
         $brands = Brand::all();
@@ -67,6 +77,7 @@ class PostController extends Controller
             'fuel_type' => ['required', 'string', 'max:255'],
             'transmission' => ['required', 'string', 'max:255'],
             'role_id' => ['required'],
+//            'user_id' => ['required'],
             'description' => ['required', 'string', 'max:2000']
         ]);
 
@@ -81,6 +92,7 @@ class PostController extends Controller
             'fuel_type' => $request->input('fuel_type'),
             'transmission' => $request->input('transmission'),
             'role_id' => $request->input('role_id'),
+            'user_id' => Auth::user()->id,
             'description' => $request->input('description'),
         ]);
 
@@ -94,6 +106,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //display single post
+
         return view('posts.show', ['post' => $post]);
 
 
@@ -104,6 +117,19 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
+
+
+//        if(Auth::guest()){
+//            return redirect('/login');
+//        }
+
+        \Illuminate\Support\Facades\Gate::authorize('edit-post', $post);
+
+//        if($post->user->isNot(Auth::user())){
+//            abort(403);
+//        }
+
         $models = Car::all();
         $brands = Brand::all();
         $categories = [

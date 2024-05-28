@@ -49,8 +49,26 @@ Route::get('/filter-cars/{brand}', [CarController::class, 'getModelsForFilter'])
 Route::get('/register', [\App\Http\Controllers\RegisteredUserController::class, 'create']);
 Route::post('/register', [\App\Http\Controllers\RegisteredUserController::class, 'store']);
 
-Route::get('/login', [\App\Http\Controllers\SessionController::class, 'create']);
+Route::get('/login', [\App\Http\Controllers\SessionController::class, 'create'])->name('login');
 Route::post('/login', [\App\Http\Controllers\SessionController::class, 'store']);
 Route::post('/logout', [\App\Http\Controllers\SessionController::class, 'destroy']);
 
-Route::resource('posts', \App\Http\Controllers\PostController::class);
+Route::get('/my-applications', function (){
+    $user = \App\Models\User::find(\Illuminate\Support\Facades\Auth::user()->id);
+    $posts = $user->post;
+
+    return view('my-application', ['posts' => $posts]);
+});
+
+Route::delete('/my-applications/{post}', function (\App\Models\Post $post){
+
+
+    $post->delete();
+
+    return redirect('/my-applications');
+
+});
+
+
+Route::resource('posts', \App\Http\Controllers\PostController::class)->middleware('auth')->except(['show']);
+Route::get('posts/{post}', [\App\Http\Controllers\PostController::class, 'show']);
