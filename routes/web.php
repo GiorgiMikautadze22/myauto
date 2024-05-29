@@ -20,11 +20,17 @@ Route::get('/', function () {
     if (request()->filled('model')) {
         $query->where('model', 'like', '%' . request()->input('model') . '%');
     }
-    if (request()->filled('year')) {
-        $query->where('year', '>=', request()->input('year'));
+    if (request()->filled('year_min')) {
+        $query->where('year', '>=', request()->input('year_min'));
     }
-    if (request()->filled('price')) {
-        $query->where('price', '<=', request()->input('price'));
+    if (request()->filled('year_max')) {
+        $query->where('year', '<=', request()->input('year_max'));
+    }
+    if (request()->filled('price_min')) {
+        $query->where('price', '>=', request()->input('price_min'));
+    }
+    if (request()->filled('price_max')) {
+        $query->where('price', '<=', request()->input('price_max'));
     }
 
     $posts = $query->paginate(12);

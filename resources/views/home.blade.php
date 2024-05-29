@@ -46,16 +46,33 @@
                         <div>
 {{--                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>--}}
 {{--                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
-                            <label for="year">
+                            <label for="year_min">
                                 <select
-                                    name="year" id="year"
+                                    name="year_min" id="year_min"
+                                    class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5">
+                                    <option hidden="" value="">Min Year</option>
+                                    @for($year = 1990; $year <= 2024; $year++)
+                                        <option value="{{$year}}">{{$year}}</option>
+                                    @endfor
+                                </select>
+                                @error('year_min')
+                                <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+                                @enderror
+                            </label>
+                        </div>
+                        <div>
+{{--                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>--}}
+{{--                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            <label for="year_max">
+                                <select
+                                    name="year_max" id="year_max"
                                     class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5">
                                     <option hidden="" value="">Max Year</option>
                                     @for($year = 1990; $year <= 2024; $year++)
                                         <option value="{{$year}}">{{$year}}</option>
                                     @endfor
                                 </select>
-                                @error('year')
+                                @error('year_max')
                                 <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
                                 @enderror
                             </label>
@@ -63,13 +80,27 @@
                         <div>
 {{--                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>--}}
 {{--                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
-                            <label for="price">
+                            <label for="price_min">
                                 <input
-                                    name="price" id="price"
+                                    name="price_min" id="price_min"
                                     class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5"
                                     placeholder="Max Price"
                                 />
-                                @error('price')
+                                @error('price_min')
+                                <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
+                                @enderror
+                            </label>
+                        </div>
+                        <div>
+{{--                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>--}}
+{{--                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            <label for="price_max">
+                                <input
+                                    name="price_max" id="price_max"
+                                    class="w-[300px] h-[50px] border border-gray-300 rounded-[8px] placeholder-black px-5 items-center pb-0.5"
+                                    placeholder="Max Price"
+                                />
+                                @error('price_max')
                                 <p class="text-xs font-bold text-red-500 mt-2">{{$message}}</p>
                                 @enderror
                             </label>
