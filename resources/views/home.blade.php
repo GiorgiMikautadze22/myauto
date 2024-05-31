@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <x-layout>
     <x-header></x-header>
     <section class="mt-10 px-10 ">
@@ -8,8 +9,8 @@
                 <form id="filter-form" method="GET" action="{{ url()->current() }}">
                     <div class="grid grid-cols-4 gap-5">
                         <div>
-{{--                            <label for="make" class="block text-sm font-medium text-gray-700">Make</label>--}}
-{{--                            <input type="text" name="make" id="make" value="{{ request('make') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            {{--                            <label for="make" class="block text-sm font-medium text-gray-700">Make</label>--}}
+                            {{--                            <input type="text" name="make" id="make" value="{{ request('make') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
                             <label for="make">
                                 <select
                                     name="make" id="make"
@@ -25,8 +26,8 @@
                             </label>
                         </div>
                         <div>
-{{--                            <label for="model" class="block text-sm font-medium text-gray-700">Model</label>--}}
-{{--                            <input type="text" name="model" id="model" value="{{ request('model') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            {{--                            <label for="model" class="block text-sm font-medium text-gray-700">Model</label>--}}
+                            {{--                            <input type="text" name="model" id="model" value="{{ request('model') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
                             <label for="model" id="model-label">
                                 <select
                                     name="model_id" id="model"
@@ -44,8 +45,8 @@
                         <input type="hidden" name="model" id="model_name">
 
                         <div>
-{{--                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>--}}
-{{--                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            {{--                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>--}}
+                            {{--                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
                             <label for="year_min">
                                 <select
                                     name="year_min" id="year_min"
@@ -61,8 +62,8 @@
                             </label>
                         </div>
                         <div>
-{{--                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>--}}
-{{--                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            {{--                            <label for="year" class="block text-sm font-medium text-gray-700">Year</label>--}}
+                            {{--                            <input type="number" name="year" id="year" value="{{ request('year') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
                             <label for="year_max">
                                 <select
                                     name="year_max" id="year_max"
@@ -78,8 +79,8 @@
                             </label>
                         </div>
                         <div>
-{{--                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>--}}
-{{--                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            {{--                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>--}}
+                            {{--                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
                             <label for="price_min">
                                 <input
                                     name="price_min" id="price_min"
@@ -92,8 +93,8 @@
                             </label>
                         </div>
                         <div>
-{{--                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>--}}
-{{--                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+                            {{--                            <label for="price" class="block text-sm font-medium text-gray-700">Max Price</label>--}}
+                            {{--                            <input type="number" name="price" id="price" value="{{ request('price') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
                             <label for="price_max">
                                 <input
                                     name="price_max" id="price_max"
@@ -108,7 +109,9 @@
                     </div>
                     <div class="mt-5">
                         <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Filter</button>
-                        <button type="button" id="clear-filter" class="px-4 py-2 bg-blue-600 text-white rounded-md">Clear Filter</button>
+                        <button type="button" id="clear-filter" class="px-4 py-2 bg-blue-600 text-white rounded-md">
+                            Clear Filter
+                        </button>
                     </div>
                 </form>
             </div>
@@ -119,12 +122,16 @@
         <h2 class="text-[32px] font-bold">Super VIP</h2>
         <div class="grid grid-cols-6 items-center gap-10">
             @foreach($super_vip as $role)
-                <a href="posts/{{$role->id}}" class="w-[225px] cursor-pointer">
-                    <img src="https://www.usnews.com/object/image/00000186-0f0d-da67-a5ef-2f5f87990000/2023-lucid-air-1.jpg?update-time=1675289789997&size=responsive640" alt="post image" class="w-full h-[170px] object-cover rounded-t-[12px]">
+                <div class="w-[225px]">
+                    <a href="posts/{{$role->id}}">
+                        <img
+                            src="https://www.usnews.com/object/image/00000186-0f0d-da67-a5ef-2f5f87990000/2023-lucid-air-1.jpg?update-time=1675289789997&size=responsive640"
+                            alt="post image" class="w-full h-[170px] object-cover rounded-t-[12px]">
+                    </a>
                     <div class="bg-white w-full p-5 rounded-b-[12px]">
-                        <div>
+                        <a href="posts/{{$role->id}}" class="hover:underline hover:text-sky-500">
                             <p>{{$role->year}} - {{$role->make}}</p>
-                        </div>
+                        </a>
                         <div class="">
                             <p class="font-bold">{{number_format($role->price)}} $</p>
                         </div>
@@ -137,18 +144,25 @@
                                 <p>{{ucfirst($role->fuel_type)}}</p>
                             </div>
                         </div>
+
                     </div>
-                </a>
+
+                </div>
             @endforeach
         </div>
         <div class="grid grid-cols-6 items-center gap-10">
             @foreach($posts as $post)
-                <a href="posts/{{$post->id}}" class="w-[225px] cursor-pointer">
-                    <img src="https://www.usnews.com/object/image/00000186-0f0d-da67-a5ef-2f5f87990000/2023-lucid-air-1.jpg?update-time=1675289789997&size=responsive640" alt="post image" class="w-full h-[170px] object-cover rounded-t-[12px]">
+
+                <div class="w-[225px]">
+                    <a href="posts/{{$post->id}}">
+                        <img
+                            src="https://www.usnews.com/object/image/00000186-0f0d-da67-a5ef-2f5f87990000/2023-lucid-air-1.jpg?update-time=1675289789997&size=responsive640"
+                            alt="post image" class="w-full h-[170px] object-cover rounded-t-[12px]">
+                    </a>
                     <div class="bg-white w-full p-5 rounded-b-[12px]">
-                        <div>
+                        <a href="posts/{{$post->id}}" class="hover:underline hover:text-sky-500">
                             <p>{{$post->year}} - {{$post->make}}</p>
-                        </div>
+                        </a>
                         <div class="">
                             <p class="font-bold">{{number_format($post->price)}} $</p>
                         </div>
@@ -161,8 +175,17 @@
                                 <p>{{ucfirst($post->fuel_type)}}</p>
                             </div>
                         </div>
+                        @auth()
+                            <button
+                                data-post-id="{{$post->id}}"
+                                class="like-button w-full bg-sky-300 flex items-center justify-center rounded-[8px] text-white font-bold my-3 cursor-pointer hover:bg-sky-500 transition">
+                                Like
+                            </button>
+                        @endauth
                     </div>
-                </a>
+
+                </div>
+
             @endforeach
         </div>
         <div class="my-10">
@@ -170,8 +193,9 @@
         </div>
     </section>
 
+
     <script>
-        document.getElementById('clear-filter').addEventListener('click', function() {
+        document.getElementById('clear-filter').addEventListener('click', function () {
             const form = document.getElementById('filter-form');
             form.querySelectorAll('input').forEach(input => {
                 input.value = '';
@@ -184,6 +208,26 @@
             const modelSelect = document.getElementById('model');
             const makeNameInput = document.getElementById('make_name');
             const modelNameInput = document.getElementById('model_name');
+
+
+            document.querySelectorAll('.like-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const postId = this.dataset.postId;
+
+                    //IF is liked then unlike, ELSE like
+                    //IF postId and user_id matches in the database then unlike else like
+                    fetch(`/posts/${postId}/like`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                        });
+                });
+            });
 
             makeSelect.addEventListener('change', function () {
                 const makeId = makeSelect.value;

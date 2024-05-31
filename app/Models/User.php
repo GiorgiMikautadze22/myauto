@@ -16,14 +16,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-  protected $guarded = [];
-
-
-      public function post()
-      {
-          return $this->hasMany(Post::class);
-      }
-
+    protected $guarded = [];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -33,6 +26,16 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
 
     /**
      * Get the attributes that should be cast.

@@ -4,14 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Like;
 use App\Models\Post;
-use App\Models\User;
-use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
+
 {
+
+    public function like(Post $post)
+    {
+        $like = new Like([
+            'user_id' => Auth::id(),
+            'post_id' => $post->id,
+        ]);
+
+        $like->save();
+
+    }
+
+    public function unlike(Post $post)
+    {
+        $post->likes()->where('user_id', Auth::id())->delete();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -19,46 +37,6 @@ class PostController extends Controller
     {
         //Upon searching
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-        if(Auth::guest()){
-            return redirect('/login');
-        }
-
-
-
-        //creating a post
-        $models = Car::all();
-        $brands = Brand::all();
-        $categories = [
-            "Sedan",
-            "SUV",
-            "Coupe",
-            "Convertible",
-            "Hatchback",
-            "Wagon",
-            "Pickup Truck",
-            "Minivan",
-            "Sports Car",
-            "Luxury Car",
-            "Electric Car",
-            "Hybrid Car",
-            "Diesel Car",
-            "Crossover",
-            "Compact Car",
-            "Subcompact Car"
-        ];
-
-
-//        $brand_models = Brand::find()
-
-        return view('posts.create', ['models' => $models, 'brands' => $brands, 'categories' => $categories]);
     }
 
     /**
@@ -99,6 +77,44 @@ class PostController extends Controller
         return redirect("");
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+
+        if (Auth::guest()) {
+            return redirect('/login');
+        }
+
+
+        //creating a post
+        $models = Car::all();
+        $brands = Brand::all();
+        $categories = [
+            "Sedan",
+            "SUV",
+            "Coupe",
+            "Convertible",
+            "Hatchback",
+            "Wagon",
+            "Pickup Truck",
+            "Minivan",
+            "Sports Car",
+            "Luxury Car",
+            "Electric Car",
+            "Hybrid Car",
+            "Diesel Car",
+            "Crossover",
+            "Compact Car",
+            "Subcompact Car"
+        ];
+
+
+//        $brand_models = Brand::find()
+
+        return view('posts.create', ['models' => $models, 'brands' => $brands, 'categories' => $categories]);
+    }
 
     /**
      * Display the specified resource.
@@ -119,12 +135,11 @@ class PostController extends Controller
     {
 
 
-
 //        if(Auth::guest()){
 //            return redirect('/login');
 //        }
 
-        \Illuminate\Support\Facades\Gate::authorize('edit-post', $post);
+        Gate::authorize('edit-post', $post);
 
 //        if($post->user->isNot(Auth::user())){
 //            abort(403);

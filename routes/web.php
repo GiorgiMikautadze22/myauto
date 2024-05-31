@@ -1,18 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\SessionController;
+use App\Models\Brand;
+use App\Models\Car;
+use App\Models\Post;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    $super_vip = \App\Models\Role::find(1)->post;
-    $vip_plus = \App\Models\Role::find(2)->post;
-    $vip = \App\Models\Role::find(3)->post;
+    $super_vip = Role::find(1)->post;
+    $vip_plus = Role::find(2)->post;
+    $vip = Role::find(3)->post;
 
-    $brands = \App\Models\Brand::all();
-    $models = \App\Models\Car::all();
+    $brands = Brand::all();
+    $models = Car::all();
 
-    $query = \App\Models\Post::query();
+    $query = Post::query();
 
     if (request()->filled('make')) {
         $query->where('make', 'like', '%' . request()->input('make') . '%');
@@ -46,27 +55,30 @@ Route::get('/', function () {
     ]);
 });
 
+Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
+Route::post('/posts/{post}/unlike', [PostController::class, 'unlike'])->name('posts.unlike');
+
 
 Route::get('/models/{makeId}', [CarController::class, 'getModelsByMake']);
 Route::get('/filter-cars/{brand}', [CarController::class, 'getModelsForFilter']);
 
 
 //Auth
-Route::get('/register', [\App\Http\Controllers\RegisteredUserController::class, 'create']);
-Route::post('/register', [\App\Http\Controllers\RegisteredUserController::class, 'store']);
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [\App\Http\Controllers\SessionController::class, 'create'])->name('login');
-Route::post('/login', [\App\Http\Controllers\SessionController::class, 'store']);
-Route::post('/logout', [\App\Http\Controllers\SessionController::class, 'destroy']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
+Route::post('/login', [SessionController::class, 'store']);
+Route::post('/logout', [SessionController::class, 'destroy']);
 
-Route::get('/my-applications', function (){
-    $user = \App\Models\User::find(\Illuminate\Support\Facades\Auth::user()->id);
+Route::get('/my-applications', function () {
+    $user = User::find(Auth::user()->id);
     $posts = $user->post;
 
     return view('my-application', ['posts' => $posts]);
 });
 
-Route::delete('/my-applications/{post}', function (\App\Models\Post $post){
+Route::delete('/my-applications/{post}', function (Post $post) {
 
 
     $post->delete();
@@ -76,5 +88,5 @@ Route::delete('/my-applications/{post}', function (\App\Models\Post $post){
 });
 
 
-Route::resource('posts', \App\Http\Controllers\PostController::class)->middleware('auth')->except(['show']);
-Route::get('posts/{post}', [\App\Http\Controllers\PostController::class, 'show']);
+Route::resource('posts', PostController::class)->middleware('auth')->except(['show']);
+Route::get('posts/{post}', [PostController::class, 'show']);
