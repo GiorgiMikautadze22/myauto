@@ -145,6 +145,14 @@
                             </div>
                         </div>
 
+                        @auth()
+                            <button
+                                data-post-id="{{$role->id}}"
+                                class="like-button w-full bg-sky-300 flex items-center justify-center rounded-[8px] text-white font-bold my-3 cursor-pointer hover:bg-sky-500 transition">
+                                {{ Auth::user()->likes->contains('post_id', $role->id) ? 'Unlike' : 'Like' }}
+                            </button>
+                        @endauth
+
                     </div>
 
                 </div>
@@ -179,7 +187,7 @@
                             <button
                                 data-post-id="{{$post->id}}"
                                 class="like-button w-full bg-sky-300 flex items-center justify-center rounded-[8px] text-white font-bold my-3 cursor-pointer hover:bg-sky-500 transition">
-                                Like
+                                {{ Auth::user()->likes->contains('post_id', $post->id) ? 'Unlike' : 'Like' }}
                             </button>
                         @endauth
                     </div>
@@ -187,6 +195,46 @@
                 </div>
 
             @endforeach
+        </div>
+        <div>
+            <h2 class="text-[32px] font-bold">Recently Added</h2>
+            <div class="grid grid-cols-6 items-center gap-10 mt-5">
+                @foreach($recently_added as $recently_added_post)
+                    <div class="w-[225px]">
+                        <a href="posts/{{$recently_added_post->id}}">
+                            <img
+                                src="https://www.usnews.com/object/image/00000186-0f0d-da67-a5ef-2f5f87990000/2023-lucid-air-1.jpg?update-time=1675289789997&size=responsive640"
+                                alt="post image" class="w-full h-[170px] object-cover rounded-t-[12px]">
+                        </a>
+                        <div class="bg-white w-full p-5 rounded-b-[12px]">
+                            <a href="posts/{{$recently_added_post->id}}" class="hover:underline hover:text-sky-500">
+                                <p>{{$recently_added_post->year}} - {{$recently_added_post->make}}</p>
+                            </a>
+                            <div class="">
+                                <p class="font-bold">{{number_format($recently_added_post->price)}} $</p>
+                            </div>
+                            <div class="h-[1px] w-full bg-gray-300 my-3"></div>
+                            <div class="flex gap-5 justify-center items-center">
+                                <div class="flex px-3 py-1 text-xs font-semibold text-gray-600 bg-gray-200 rounded-[8px]">
+                                    <p>{{ucfirst($recently_added_post->category)}}</p>
+                                </div>
+                                <div class="flex px-3 py-1 text-xs font-semibold text-gray-600 bg-gray-200 rounded-[8px]">
+                                    <p>{{ucfirst($recently_added_post->fuel_type)}}</p>
+                                </div>
+                            </div>
+                            @auth()
+                                <button
+                                    data-post-id="{{$recently_added_post->id}}"
+                                    class="like-button w-full bg-sky-300 flex items-center justify-center rounded-[8px] text-white font-bold my-3 cursor-pointer hover:bg-sky-500 transition">
+                                    {{ Auth::user()->likes->contains('post_id', $recently_added_post->id) ? 'Unlike' : 'Like' }}
+                                </button>
+                            @endauth
+                        </div>
+
+                    </div>
+
+                @endforeach
+            </div>
         </div>
         <div class="my-10">
             {{$posts->links()}}
@@ -209,23 +257,32 @@
             const makeNameInput = document.getElementById('make_name');
             const modelNameInput = document.getElementById('model_name');
 
+            const updateLikeButtons = (postId, action) => {
+                document.querySelectorAll(`.like-button[data-post-id="${postId}"]`).forEach(button => {
+                    button.innerText = action === 'like' ? 'Unlike' : 'Like';
+                });
+            };
 
-            document.querySelectorAll('.like-button').forEach(button => {
-                button.addEventListener('click', function () {
-                    const postId = this.dataset.postId;
+            document.querySelectorAll('.like-button').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var postId = button.getAttribute('data-post-id');
+                    var action = button.innerText === 'Like' ? 'like' : 'unlike';
+                    var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                    //IF is liked then unlike, ELSE like
-                    //IF postId and user_id matches in the database then unlike else like
                     fetch(`/posts/${postId}/like`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
+                            'X-CSRF-TOKEN': token
+                        },
                     })
                         .then(response => response.json())
                         .then(data => {
-                        });
+                            if (data.success) {
+                                updateLikeButtons(postId, action);
+                            }
+                        })
+                        .catch(error => console.error('Error:', error));
                 });
             });
 
@@ -265,6 +322,6 @@
                 }
             });
         });
-
     </script>
+
 </x-layout>

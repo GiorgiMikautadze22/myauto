@@ -14,20 +14,50 @@ class PostController extends Controller
 
 {
 
+//    public function like(Post $post)
+//    {
+//
+//        $like = new Like([
+//            'user_id' => Auth::id(),
+//            'post_id' => $post->id,
+//        ]);
+//
+//        $like->save();
+//
+//
+//
+//        return response()->json(['success' => true]);
+//
+//    }
+
     public function like(Post $post)
     {
-        $like = new Like([
-            'user_id' => Auth::id(),
-            'post_id' => $post->id,
-        ]);
 
-        $like->save();
+        $existingLike = Like::where('user_id', Auth::id())->where('post_id',$post->id)->first();
+
+
+        if ($existingLike){
+            $this->unlike($post);
+
+        } else{
+
+            $like = new Like([
+                'user_id' => Auth::id(),
+                'post_id' => $post->id,
+            ]);
+
+            $like->save();
+        }
+
+        return response()->json(['success' => true]);
 
     }
 
     public function unlike(Post $post)
     {
         $post->likes()->where('user_id', Auth::id())->delete();
+
+        return response()->json(['success' => true]);
     }
 
     /**

@@ -43,7 +43,7 @@ Route::get('/', function () {
     }
 
     $posts = $query->paginate(12);
-
+    $recently_added = Post::orderBy('created_at', 'desc')->take(6)->get();
 
     return view('home', [
         'posts' => $posts,
@@ -51,7 +51,8 @@ Route::get('/', function () {
         'vip_plus' => $vip_plus,
         'vip' => $vip,
         'brands' => $brands,
-        'models' => $models
+        'models' => $models,
+        'recently_added' => $recently_added
     ]);
 });
 
@@ -76,6 +77,15 @@ Route::get('/my-applications', function () {
     $posts = $user->post;
 
     return view('my-application', ['posts' => $posts]);
+});
+
+Route::get('/favorites', function (){
+
+    $user = User::find(Auth::user()->id);
+    $posts = $user->likes;
+
+
+    return view('favorites', ['posts' => $posts]);
 });
 
 Route::delete('/my-applications/{post}', function (Post $post) {

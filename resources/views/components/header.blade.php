@@ -48,7 +48,9 @@
                     <img class="w-full h-full" src="https://cdn-icons-png.freepik.com/512/8459/8459373.png" alt="profile image">
                 </div>
                 <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
+                    <p class="block px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">{{\Illuminate\Support\Facades\Auth::user()->email->}}</p>
                     <a href="/my-applications" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My Applications</a>
+                    <a href="/favorites" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Favorites</a>
                 </div>
             </div>
         </div>
